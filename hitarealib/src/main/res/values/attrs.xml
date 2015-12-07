@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="Hitarea">
         <attr name="targetId" format="integer"/>
+        <attr name="debug" format="boolean"/>
     </declare-styleable>
 </resources>

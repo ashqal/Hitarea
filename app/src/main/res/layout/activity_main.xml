@@ -16,16 +16,15 @@
             android:layout_height="100dp" />
         <com.asha.Hitarea
             app:targetId="@id/test"
+            app:debug="true"
             android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:background="#666666"/>
+            android:layout_height="150dp" />
         <Button
             android:id="@+id/buttonTest"
-            android:text="button test"
+            android:text="list view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <com.asha.Hitarea
-            android:background="#ffeba0"
             app:targetId="@id/buttonTest"
             android:layout_width="match_parent"
             android:layout_height="150dp" />

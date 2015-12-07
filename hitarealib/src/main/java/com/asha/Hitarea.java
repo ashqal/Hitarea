@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
 
 /**
  * Created by hzqiujiadi on 15/12/7.
@@ -18,7 +19,8 @@ import android.view.View;
 public class Hitarea extends View {
     private static final String TAG = "Hitarea";
     private static final int sDefaultId = -1;
-    private boolean mDebug = true;
+    private static final int sDefaultDebugBgColor = 0x6696ffea;
+    private boolean mDebug = false;
     private int mTargetViewId = sDefaultId;
     private View mTargetView;
     private Matrix mTransformMatrix;
@@ -35,13 +37,12 @@ public class Hitarea extends View {
 
     public Hitarea(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        if (getVisibility() == VISIBLE && !mDebug) {
-            setVisibility(INVISIBLE);
-        }
         TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.Hitarea,defStyleAttr,0);
         if (  ta != null ){
             if (ta.hasValue(R.styleable.Hitarea_targetId))
                 mTargetViewId = ta.getResourceId(R.styleable.Hitarea_targetId,sDefaultId);
+            if (ta.hasValue(R.styleable.Hitarea_debug))
+                mDebug = ta.getBoolean(R.styleable.Hitarea_debug,false);
             ta.recycle();
         }
 
@@ -55,7 +56,10 @@ public class Hitarea extends View {
     @SuppressLint("MissingSuperCall")
     @Override
     public void draw(Canvas canvas) {
-        if (mDebug) super.draw(canvas);
+        if (mDebug) {
+            if ( getBackground() == null ) setBackgroundColor(sDefaultDebugBgColor);
+            super.draw(canvas);
+        }
     }
 
     @Override
@@ -72,7 +76,16 @@ public class Hitarea extends View {
     private void ensureTargetView() {
         if ( mTargetView != null ) return;
         if ( mTargetViewId == -1 ) return;
-        mTargetView = getRootView().findViewById(mTargetViewId);
+        View v = this;
+        while ( true ){
+            ViewParent vp = v.getParent();
+            if ( vp == null ) break;
+            if ( !(vp instanceof View) ) break;
+            v = (View) vp;
+            mTargetView = v.findViewById(mTargetViewId);
+            if ( mTargetView != null ) break;
+            if ( v == getRootView() ) break;
+        }
     }
 
     private void transformMotionEvent(MotionEvent event){
