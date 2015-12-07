@@ -113,6 +113,8 @@ public class Hitarea extends View {
     }
 
     /**
+     * copied from {@link android.widget.Space}
+     *
      * Compare to: {@link View#getDefaultSize(int, int)}
      * If mode is AT_MOST, return the child size instead of the parent size
      * (unless it is too big).
@@ -136,6 +138,9 @@ public class Hitarea extends View {
         return result;
     }
 
+    /**
+     * copied from {@link android.widget.Space}
+     * */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         setMeasuredDimension(
