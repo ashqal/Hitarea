@@ -70,7 +70,7 @@ public class Hitarea extends View {
         if ( mTargetView == null ) return super.onTouchEvent(event);
         updateTransformMatrix();
         transformMotionEvent(event);
-        return mTargetView.onTouchEvent(event);
+        return mTargetView.dispatchTouchEvent(event);
     }
 
     private void ensureTargetView() {
