@@ -87,6 +87,7 @@ public class Hitarea extends View implements HitareaHelper.HitareaDelegate {
 
     @Override
     public View getTargetView(int targetViewId) {
+        // find target view by id nearby
         if ( targetViewId == -1 ) return null;
         View targetView = null;
         View v = this;
