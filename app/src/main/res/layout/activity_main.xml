@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.asha.hitarea.MainActivity">
+    <com.asha.hitarea.DemoView
+        android:id="@+id/test"
+        android:background="#CCCCCC"
+        android:layout_width="200dp"
+        android:layout_height="70dp" />
+    <com.asha.Hitarea
+        app:targetId="@id/test"
+        app:debug="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context="com.asha.hitarea.MainActivity">
-        <com.asha.hitarea.DemoView
-            android:id="@+id/test"
-            android:background="#CCCCCC"
-            android:layout_width="200dp"
-            android:layout_height="100dp" />
-        <com.asha.Hitarea
-            app:targetId="@id/test"
-            app:debug="true"
-            android:layout_width="200dp"
-            android:layout_height="150dp" />
+        android:layout_height="120dp" />
+    <FrameLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <Button
             android:id="@+id/buttonTest"
             android:text="list view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <com.asha.Hitarea
+            app:debug="true"
             app:targetId="@id/buttonTest"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
-    </LinearLayout>
-</ScrollView>
+            android:layout_height="50dp" />
+    </FrameLayout>
+
+    <com.asha.HitareaWrapper
+        app:debug="true"
+        android:layout_marginTop="5dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp">
+        <com.asha.hitarea.DemoView
+            android:tag="@string/tag_hitarea"
+            android:layout_gravity="center"
+            android:background="#CCCCCC"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        <Button
+            android:text="other"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.asha.HitareaWrapper>
+</LinearLayout>

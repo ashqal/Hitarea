@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -41,10 +40,11 @@ public class DemoView extends View {
     int x = -1, y = -1;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d(TAG,"DemoView onTouchEvent");
         final int action = MotionEventCompat.getActionMasked(event);
         switch ( action ){
             case MotionEvent.ACTION_DOWN:
+                x = (int) event.getX();
+                y = (int) event.getY();
                 return true;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:

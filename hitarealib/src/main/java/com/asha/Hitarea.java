@@ -2,12 +2,8 @@ package com.asha;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
@@ -16,16 +12,10 @@ import android.view.ViewParent;
  * Created by hzqiujiadi on 15/12/7.
  * hzqiujiadi ashqalcn@gmail.com
  */
-public class Hitarea extends View {
+public class Hitarea extends View implements HitareaHelper.HitareaDelegate {
     private static final String TAG = "Hitarea";
-    private static final int sDefaultId = -1;
-    private static final int sDefaultDebugBgColor = 0x6696ffea;
-    private boolean mDebug = false;
-    private int mTargetViewId = sDefaultId;
-    private View mTargetView;
-    private Matrix mTransformMatrix;
-    private float[] mPointSrc;
-    private float[] mPointDst;
+
+    private HitareaHelper mHelper;
 
     public Hitarea(Context context) {
         this(context,null);
@@ -37,14 +27,7 @@ public class Hitarea extends View {
 
     public Hitarea(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.Hitarea,defStyleAttr,0);
-        if (  ta != null ){
-            if (ta.hasValue(R.styleable.Hitarea_targetId))
-                mTargetViewId = ta.getResourceId(R.styleable.Hitarea_targetId,sDefaultId);
-            if (ta.hasValue(R.styleable.Hitarea_debug))
-                mDebug = ta.getBoolean(R.styleable.Hitarea_debug,false);
-            ta.recycle();
-        }
+        mHelper = new HitareaHelper(context,attrs,defStyleAttr);
 
     }
 
@@ -56,60 +39,14 @@ public class Hitarea extends View {
     @SuppressLint("MissingSuperCall")
     @Override
     public void draw(Canvas canvas) {
-        if (mDebug) {
-            if ( getBackground() == null ) setBackgroundColor(sDefaultDebugBgColor);
-            super.draw(canvas);
+        if (mHelper.isDebug()) {
+            canvas.drawColor(HitareaHelper.sDefaultDebugBgColor);
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d(TAG,"onTouchEvent");
-
-        ensureTargetView();
-        if ( mTargetView == null ) return super.onTouchEvent(event);
-        updateTransformMatrix();
-        transformMotionEvent(event);
-        return mTargetView.dispatchTouchEvent(event);
-    }
-
-    private void ensureTargetView() {
-        if ( mTargetView != null ) return;
-        if ( mTargetViewId == -1 ) return;
-        View v = this;
-        while ( true ){
-            ViewParent vp = v.getParent();
-            if ( vp == null ) break;
-            if ( !(vp instanceof View) ) break;
-            v = (View) vp;
-            mTargetView = v.findViewById(mTargetViewId);
-            if ( mTargetView != null ) break;
-            if ( v == getRootView() ) break;
-        }
-    }
-
-    private void transformMotionEvent(MotionEvent event){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            event.transform(mTransformMatrix);
-        } else {
-            if ( mPointSrc == null ){
-                mPointSrc = new float[2];
-                mPointDst = new float[2];
-            }
-            mPointSrc[0] = event.getX();
-            mPointSrc[1] = event.getY();
-            mTransformMatrix.mapPoints(mPointDst,mPointSrc);
-            event.setLocation(mPointDst[0],mPointDst[1]);
-        }
-    }
-
-    private void updateTransformMatrix() {
-        if ( mTransformMatrix == null ){
-            mTransformMatrix = new Matrix();
-        }
-        float scaleX = mTargetView.getMeasuredWidth() * 1.0f / getMeasuredWidth();
-        float scaleY = mTargetView.getMeasuredHeight() * 1.0f / getMeasuredHeight();
-        mTransformMatrix.setScale(scaleX,scaleY);
+        return mHelper.onTouchEvent(event,this);
     }
 
     /**
@@ -146,5 +83,27 @@ public class Hitarea extends View {
         setMeasuredDimension(
                 getDefaultSize2(getSuggestedMinimumWidth(), widthMeasureSpec),
                 getDefaultSize2(getSuggestedMinimumHeight(), heightMeasureSpec));
+    }
+
+    @Override
+    public View getTargetView(int targetViewId) {
+        if ( targetViewId == -1 ) return null;
+        View targetView = null;
+        View v = this;
+        while ( true ){
+            ViewParent vp = v.getParent();
+            if ( vp == null ) break;
+            if ( !(vp instanceof View) ) break;
+            v = (View) vp;
+            targetView = v.findViewById(targetViewId);
+            if ( targetView != null ) break;
+            if ( v == getRootView() ) break;
+        }
+        return targetView;
+    }
+
+    @Override
+    public View getHitareaView() {
+        return this;
     }
 }
