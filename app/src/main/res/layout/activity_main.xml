@@ -6,18 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.asha.hitarea.MainActivity">
-    <com.asha.hitarea.DemoView
-        android:id="@+id/test"
-        android:background="#CCCCCC"
-        android:layout_width="200dp"
-        android:layout_height="70dp" />
-    <com.asha.Hitarea
-        app:targetId="@id/test"
-        app:debug="true"
-        android:layout_width="match_parent"
-        android:layout_height="120dp" />
     <FrameLayout
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
@@ -31,6 +20,22 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" />
     </FrameLayout>
+
+    <FrameLayout
+        android:layout_marginTop="5dp"
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.asha.hitarea.DemoView
+            android:background="#CCCCCC"
+            android:layout_width="200dp"
+            android:layout_height="70dp" />
+    </FrameLayout>
+    <com.asha.Hitarea
+        app:targetId="@id/test"
+        app:debug="true"
+        android:layout_width="match_parent"
+        android:layout_height="120dp" />
 
     <com.asha.HitareaWrapper
         app:debug="true"
