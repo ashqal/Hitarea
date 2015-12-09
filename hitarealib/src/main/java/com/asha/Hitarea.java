@@ -28,7 +28,7 @@ public class Hitarea extends View implements HitareaHelper.HitareaDelegate {
     public Hitarea(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mHelper = new HitareaHelper(context,attrs,defStyleAttr);
-
+        setFocusable(false);
     }
 
     /**
