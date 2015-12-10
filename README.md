@@ -52,7 +52,7 @@ set `app:targetId` attribute in `com.asha.Hitarea` to serve as the hit area for 
 ```
 
 ### Debug Mode
-set attribute 'app:debug=fase' in `com.asha.Hitarea` or `com.asha.HitareaWrapper`, and the hit area will be transparent.
+set attribute `app:debug=false` in `com.asha.Hitarea` or `com.asha.HitareaWrapper`, and the hit area will be transparent.
 
 ##LICENSE
 ```
