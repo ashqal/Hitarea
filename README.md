@@ -30,7 +30,7 @@ set `app:targetId` attribute in `com.asha.Hitarea` to serve as the hit area for 
 ```
 
 ### HitareaWrapper
-`HitareaWrapper` is a subclass of `RelativeLayout`, and it will be regard as hit area for a child view which set tag=`@string/tag_hitarea`.
+`com.asha.HitareaWrapper` is a subclass of `RelativeLayout`, and it will be regard as hit area for a child view which set tag=`@string/tag_hitarea`.
 ```java
 <com.asha.HitareaWrapper
         app:debug="true"
@@ -50,6 +50,9 @@ set `app:targetId` attribute in `com.asha.Hitarea` to serve as the hit area for 
         android:layout_height="wrap_content" />
 </com.asha.HitareaWrapper>
 ```
+
+### Debug Mode
+set attribute 'app:debug=fase' in `com.asha.Hitarea` or `com.asha.HitareaWrapper`, and the hit area will be transparent.
 
 ##LICENSE
 ```
