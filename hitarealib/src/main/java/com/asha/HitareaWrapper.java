@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
  * Created by hzqiujiadi on 15/12/9.
  * hzqiujiadi ashqalcn@gmail.com
  */
-public class HitareaWrapper extends RelativeLayout implements HitareaHelper.HitareaDelegate {
+public class HitareaWrapper extends RelativeLayout implements HitareaHelper.HitareaDelegate,IHitarea {
     private HitareaHelper mHelper;
 
     public HitareaWrapper(Context context) {
@@ -50,5 +50,10 @@ public class HitareaWrapper extends RelativeLayout implements HitareaHelper.Hita
     @Override
     public View getHitareaView() {
         return this;
+    }
+
+    @Override
+    public void setTarget(View view) {
+        mHelper.setTarget(view);
     }
 }

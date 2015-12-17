@@ -12,7 +12,7 @@ import android.view.ViewParent;
  * Created by hzqiujiadi on 15/12/7.
  * hzqiujiadi ashqalcn@gmail.com
  */
-public class Hitarea extends View implements HitareaHelper.HitareaDelegate {
+public class Hitarea extends View implements HitareaHelper.HitareaDelegate,IHitarea {
     private static final String TAG = "Hitarea";
 
     private HitareaHelper mHelper;
@@ -106,5 +106,10 @@ public class Hitarea extends View implements HitareaHelper.HitareaDelegate {
     @Override
     public View getHitareaView() {
         return this;
+    }
+
+    @Override
+    public void setTarget(View view) {
+        mHelper.setTarget(view);
     }
 }

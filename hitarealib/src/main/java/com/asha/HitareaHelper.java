@@ -13,7 +13,7 @@ import android.view.View;
  * Created by hzqiujiadi on 15/12/9.
  * hzqiujiadi ashqalcn@gmail.com
  */
-public class HitareaHelper {
+public class HitareaHelper implements IHitarea {
     private static final int sDefaultId = -1;
     public static final int sDefaultDebugBgColor = 0x6696ffea;
     public static final int sDefaultDebugBgColor2 = 0x66ff969d;
@@ -43,6 +43,7 @@ public class HitareaHelper {
     public boolean onTouchEvent(MotionEvent event, HitareaDelegate delegate) {
         ensureTargetView(delegate);
         if ( mTargetView == null ) return false;
+        if ( mTargetView.getVisibility() != View.VISIBLE ) return false;
 
         updateTransformMatrix(delegate);
         transformMotionEvent(event);
@@ -78,6 +79,11 @@ public class HitareaHelper {
             mTransformMatrix.mapPoints(mPointDst,mPointSrc);
             event.setLocation(mPointDst[0],mPointDst[1]);
         }
+    }
+
+    @Override
+    public void setTarget(View view) {
+        mTargetView = view;
     }
 
     public interface HitareaDelegate {
