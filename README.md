@@ -1,12 +1,23 @@
 # Hitarea
 Designates another view to serve as the hit area for a view in android layout file.
+[![](https://jitpack.io/v/ashqal/Hitarea.svg)](https://jitpack.io/#ashqal/Hitarea)
 
 ## Demo Preview
 ![DemoPreview](https://raw.githubusercontent.com/ashqal/Hitarea/master/screenshot/HitareaPreview.gif)
 
 ## Download
 ```java
-compile 'com.asha:hitarealib:0.1'
+allprojects {
+    repositories {
+        ...
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+```java
+dependencies {
+        compile 'com.github.ashqal:Hitarea:1.0.0'
+}
 ```
 
 ## Usage
