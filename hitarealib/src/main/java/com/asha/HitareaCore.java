@@ -13,7 +13,7 @@ import android.view.View;
  * Created by hzqiujiadi on 15/12/9.
  * hzqiujiadi ashqalcn@gmail.com
  */
-public class HitareaHelper implements IHitarea {
+public class HitareaCore implements IHitarea {
     private static final int sDefaultId = -1;
     public static final int sDefaultDebugBgColor = 0x6696ffea;
     public static final int sDefaultDebugBgColor2 = 0x66ff969d;
@@ -25,13 +25,13 @@ public class HitareaHelper implements IHitarea {
     private float[] mPointSrc;
     private float[] mPointDst;
 
-    public HitareaHelper(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HitareaCore(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.Hitarea,defStyleAttr,0);
         if (  ta != null ){
-            if (ta.hasValue(R.styleable.Hitarea_targetId))
-                mTargetViewId = ta.getResourceId(R.styleable.Hitarea_targetId,sDefaultId);
-            if (ta.hasValue(R.styleable.Hitarea_debug))
-                mDebug = ta.getBoolean(R.styleable.Hitarea_debug,false);
+            if (ta.hasValue(R.styleable.Hitarea_hit_targetId))
+                mTargetViewId = ta.getResourceId(R.styleable.Hitarea_hit_targetId,sDefaultId);
+            if (ta.hasValue(R.styleable.Hitarea_hit_debug))
+                mDebug = ta.getBoolean(R.styleable.Hitarea_hit_debug,false);
             ta.recycle();
         }
     }

@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
  * Created by hzqiujiadi on 15/12/9.
  * hzqiujiadi ashqalcn@gmail.com
  */
-public class HitareaWrapper extends RelativeLayout implements HitareaHelper.HitareaDelegate,IHitarea {
-    private HitareaHelper mHelper;
+public class HitareaWrapper extends RelativeLayout implements HitareaCore.HitareaDelegate,IHitarea {
+    private HitareaCore mHelper;
 
     public HitareaWrapper(Context context) {
         this(context, null);
@@ -24,13 +24,13 @@ public class HitareaWrapper extends RelativeLayout implements HitareaHelper.Hita
 
     public HitareaWrapper(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mHelper = new HitareaHelper(context,attrs,defStyleAttr);
+        mHelper = new HitareaCore(context,attrs,defStyleAttr);
         this.setWillNotDraw(!mHelper.isDebug());
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(HitareaHelper.sDefaultDebugBgColor2);
+        canvas.drawColor(HitareaCore.sDefaultDebugBgColor2);
     }
 
     @Override

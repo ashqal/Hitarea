@@ -12,10 +12,10 @@ import android.view.ViewParent;
  * Created by hzqiujiadi on 15/12/7.
  * hzqiujiadi ashqalcn@gmail.com
  */
-public class Hitarea extends View implements HitareaHelper.HitareaDelegate,IHitarea {
+public class Hitarea extends View implements HitareaCore.HitareaDelegate,IHitarea {
     private static final String TAG = "Hitarea";
 
-    private HitareaHelper mHelper;
+    private HitareaCore mHelper;
 
     public Hitarea(Context context) {
         this(context,null);
@@ -27,7 +27,7 @@ public class Hitarea extends View implements HitareaHelper.HitareaDelegate,IHita
 
     public Hitarea(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mHelper = new HitareaHelper(context,attrs,defStyleAttr);
+        mHelper = new HitareaCore(context,attrs,defStyleAttr);
         setFocusable(false);
     }
 
@@ -40,7 +40,7 @@ public class Hitarea extends View implements HitareaHelper.HitareaDelegate,IHita
     @Override
     public void draw(Canvas canvas) {
         if (mHelper.isDebug()) {
-            canvas.drawColor(HitareaHelper.sDefaultDebugBgColor);
+            canvas.drawColor(HitareaCore.sDefaultDebugBgColor);
         }
     }
 

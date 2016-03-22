@@ -15,30 +15,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <com.asha.Hitarea
-            app:debug="true"
-            app:targetId="@id/buttonTest"
+            app:hit_debug="true"
+            app:hit_targetId="@id/buttonTest"
             android:layout_width="match_parent"
             android:layout_height="50dp" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_marginTop="5dp"
-        android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <com.asha.hitarea.DemoView
+            android:id="@+id/test"
             android:background="#CCCCCC"
             android:layout_width="200dp"
             android:layout_height="70dp" />
     </FrameLayout>
     <com.asha.Hitarea
-        app:targetId="@id/test"
-        app:debug="true"
+        app:hit_targetId="@id/test"
+        app:hit_debug="true"
         android:layout_width="match_parent"
         android:layout_height="120dp" />
 
     <com.asha.HitareaWrapper
-        app:debug="true"
+        app:hit_debug="true"
         android:layout_marginTop="5dp"
         android:layout_width="200dp"
         android:layout_height="200dp">
