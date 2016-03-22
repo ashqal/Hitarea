@@ -16,13 +16,13 @@ allprojects {
 ```
 ```java
 dependencies {
-        compile 'com.github.ashqal:Hitarea:1.0.0'
+    compile 'com.github.ashqal:Hitarea:1.0.0'
 }
 ```
 
 ## Usage
 ### Hitarea
-set `app:targetId` attribute in `com.asha.Hitarea` to serve as the hit area for a view.
+set `app:hit_targetId` attribute in `com.asha.Hitarea` to serve as the hit area for a view.
 ```java
 <FrameLayout
     android:layout_width="match_parent"
@@ -33,8 +33,8 @@ set `app:targetId` attribute in `com.asha.Hitarea` to serve as the hit area for 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <com.asha.Hitarea
-        app:debug="true"
-        app:targetId="@id/buttonTest"
+        app:hit_debug="true"
+        app:hit_targetId="@id/buttonTest"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 </FrameLayout>
@@ -44,7 +44,7 @@ set `app:targetId` attribute in `com.asha.Hitarea` to serve as the hit area for 
 `com.asha.HitareaWrapper` is a subclass of `RelativeLayout`, and it will be regard as hit area for a child view which set tag=`@string/tag_hitarea`.
 ```java
 <com.asha.HitareaWrapper
-        app:debug="true"
+        app:hit_debug="true"
         android:layout_marginTop="5dp"
         android:layout_width="200dp"
         android:layout_height="200dp">
@@ -63,7 +63,7 @@ set `app:targetId` attribute in `com.asha.Hitarea` to serve as the hit area for 
 ```
 
 ### Debug Mode
-set attribute `app:debug=false` in `com.asha.Hitarea` or `com.asha.HitareaWrapper`, and the hit area will be transparent.
+set attribute `app:hit_debug=false` in `com.asha.Hitarea` or `com.asha.HitareaWrapper`, and the hit area will be transparent.
 
 ##LICENSE
 ```
