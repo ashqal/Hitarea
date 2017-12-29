@@ -6,6 +6,7 @@ import android.graphics.Matrix;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -25,7 +26,12 @@ public class HitareaCore implements IHitarea {
     private float[] mPointSrc;
     private float[] mPointDst;
 
+    private View.OnClickListener listener;
+    private GestureDetector detector;
+    private final Context context;
+
     public HitareaCore(Context context, AttributeSet attrs, int defStyleAttr) {
+        this.context = context;
         TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.Hitarea,defStyleAttr,0);
         if (  ta != null ){
             if (ta.hasValue(R.styleable.Hitarea_hit_targetId))
@@ -41,6 +47,10 @@ public class HitareaCore implements IHitarea {
     }
 
     public boolean onTouchEvent(MotionEvent event, HitareaDelegate delegate) {
+        if (detector != null) {
+            detector.onTouchEvent(event);
+        }
+
         ensureTargetView(delegate);
         if ( mTargetView == null ) return false;
         if ( mTargetView.getVisibility() != View.VISIBLE ) return false;
@@ -84,6 +94,22 @@ public class HitareaCore implements IHitarea {
     @Override
     public void setTarget(View view) {
         mTargetView = view;
+    }
+
+    public void setOnClickListener(View.OnClickListener l) {
+        this.listener = l;
+        if (detector == null) {
+            detector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener(){
+                @Override
+                public boolean onSingleTapConfirmed(MotionEvent e) {
+                    if (listener == null) {
+                        return false;
+                    }
+                    listener.onClick(mTargetView);
+                    return true;
+                }
+            });
+        }
     }
 
     public interface HitareaDelegate {

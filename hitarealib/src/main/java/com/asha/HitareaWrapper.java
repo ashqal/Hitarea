@@ -2,6 +2,7 @@ package com.asha;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,5 +56,10 @@ public class HitareaWrapper extends RelativeLayout implements HitareaCore.Hitare
     @Override
     public void setTarget(View view) {
         mHelper.setTarget(view);
+    }
+
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener l) {
+        mHelper.setOnClickListener(l);
     }
 }

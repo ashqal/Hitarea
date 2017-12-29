@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +19,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,DemoListViewActivity.class);
                 startActivity(i);
-                //Toast.makeText(MainActivity.this, "button onClick", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MainActivity.this, "button onClick", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        findViewById(R.id.hitarea1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "hitarea1!", Toast.LENGTH_SHORT).show();
             }
         });
     }

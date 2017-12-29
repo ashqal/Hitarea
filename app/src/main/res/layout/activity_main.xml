@@ -32,6 +32,7 @@
             android:layout_height="70dp" />
     </FrameLayout>
     <com.asha.Hitarea
+        android:id="@+id/hitarea1"
         app:hit_targetId="@id/test"
         app:hit_debug="true"
         android:layout_width="match_parent"
